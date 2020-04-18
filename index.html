@@ -1,0 +1,72 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <div class="container mt-5" id="app">
+
+    <h3 class="titulo">To Do List</h3>
+    <h5>VUE Cordoba</h5>
+
+    <div class="container mt-5">
+      <button type="button" class="btn btn-info" @click="addNewTask">Agregar</button>
+      <select id="filter" name="filtro" v-model="filter">
+        <option value="all">Todas</option>
+        <option value="finished">Finalizadas</option>
+        <option value="pending">Pendientes</option>
+        <option disabled>--------</option>
+        <option value="hidden">Ocultas</option>
+      </select>
+
+      <div class="card" v-for="(item, index) of tasks" v-if="filterTasks(item)">
+        <div class="card-header" id="headingOne">
+          <input type="text" placeholder="Tarea" v-model="item.title" @focusout="saveTasks">
+
+          <button class="btn fa fa-arrows-v" type="button" data-toggle="collapse" :data-target="'#cardDetail' + index">
+
+          </button>
+          <button class="btn fa fa-trash-o" @click="removeTask(index)"></button>
+          <input type="checkbox" v-model="item.done">
+
+        </div>
+
+        <div :id="'cardDetail' + index" class="collapse multi-collapse">
+
+          <div class="card-body">
+            <textarea class="textarea" placeholder="Descripcion" v-model="item.description"
+              @focusout="saveTasks"></textarea>
+
+
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+      integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+      crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+      crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <script src="app.js"></script>
+
+</body>
+
+</html>
